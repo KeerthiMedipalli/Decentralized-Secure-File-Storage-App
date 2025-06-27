@@ -30,11 +30,10 @@ router.post('/', async (req, res) => {
     )
 
     // ✅ Custom success message (for logging or header)
-    const successMsg = '✅ File is Downloaded from the Decentralized Storage through the Blockchain.'
-    console.log(successMsg)
+
 
     res.setHeader('Content-Disposition', `attachment; filename="${fileKey.replace('.enc', '')}"`)
-    res.setHeader('X-Download-Status', successMsg) // optional custom header
+
     res.send(Buffer.from(decrypted))
   } catch (err) {
     console.error('❌ Decryption failed:', err)

@@ -9,7 +9,7 @@ function App() {
   const [downloadPassword, setDownloadPassword] = useState('')
   const [downloadMessage, setDownloadMessage] = useState('')
 
-  const BACKEND_URL = 'http://52.5.177.21:5000'
+  const BACKEND_URL = 'http://44.215.5.219:5000'
 
   const handleUpload = async () => {
     if (!file || !password) return alert('Select a file and enter password.')
@@ -53,38 +53,76 @@ function App() {
     }
   }
 
+  const containerStyle = {
+    maxWidth: 600,
+    margin: '50px auto',
+    padding: 40,
+    backgroundColor: 'rgba(0, 0, 0, 0.7)',
+    borderRadius: '20px',
+    boxShadow: '0 0 30px rgba(0, 255, 255, 0.3)',
+    color: '#fff',
+    fontFamily: 'Segoe UI, sans-serif',
+    backdropFilter: 'blur(6px)'
+  }
+
+  const inputStyle = {
+    width: '100%',
+    padding: '10px',
+    marginBottom: 15,
+    borderRadius: '8px',
+    border: '1px solid #ccc',
+    outline: 'none'
+  }
+
+  const buttonStyle = {
+    padding: '10px 20px',
+    backgroundColor: '#00ffff',
+    color: '#000',
+    fontWeight: 'bold',
+    border: 'none',
+    borderRadius: '8px',
+    cursor: 'pointer',
+    transition: 'all 0.3s ease'
+  }
+
+  const backgroundStyle = {
+    backgroundImage: `url("https://www.transparenttextures.com/patterns/cubes.png")`,
+    backgroundSize: 'cover',
+    backgroundColor: '#0c0c0c',
+    minHeight: '100vh',
+    paddingTop: '30px'
+  }
+
   return (
-    <div style={{ maxWidth: 500, margin: 'auto', padding: 30 }}>
-      <h2>🔐 Secure Decentralized Storage</h2>
+    <div style={backgroundStyle}>
+      <div style={containerStyle}>
+        <h2 style={{ textAlign: 'center', color: '#00ffff', animation: 'pulse 2s infinite' }}>
+          🔐 Secure Decentralized Storage
+        </h2>
 
-      <h3>📤 Upload</h3>
-      <input type="file" onChange={e => setFile(e.target.files[0])} /><br /><br />
-      <input
-        type="password"
-        placeholder="Enter password"
-        value={password}
-        onChange={e => setPassword(e.target.value)}
-      /><br /><br />
-      <button onClick={handleUpload}>Encrypt & Upload</button>
-      <p style={{ color: uploadMessage.startsWith('✅') ? 'green' : 'red' }}>{uploadMessage}</p>
+        <h3>📤 Upload</h3>
+        <input type="file" style={inputStyle} onChange={e => setFile(e.target.files[0])} />
+        <input type="password" style={inputStyle} placeholder="Enter password" value={password} onChange={e => setPassword(e.target.value)} />
+        <button style={buttonStyle} onMouseOver={e => e.target.style.backgroundColor = '#00ccff'} onMouseOut={e => e.target.style.backgroundColor = '#00ffff'} onClick={handleUpload}>Encrypt & Upload</button>
+        <p style={{ color: uploadMessage.startsWith('✅') ? 'lightgreen' : 'red' }}>{uploadMessage}</p>
 
-      <hr />
+        <hr style={{ border: '1px solid #444' }} />
 
-      <h3>📥 Download</h3>
-      <input
-        type="text"
-        placeholder="Enter uploaded file name (e.g., invoice.pdf.enc)"
-        value={fileKey}
-        onChange={e => setFileKey(e.target.value)}
-      /><br /><br />
-      <input
-        type="password"
-        placeholder="Enter password"
-        value={downloadPassword}
-        onChange={e => setDownloadPassword(e.target.value)}
-      /><br /><br />
-      <button onClick={handleDownload}>Decrypt & Download</button>
-      <p style={{ color: downloadMessage.startsWith('✅') ? 'green' : 'red' }}>{downloadMessage}</p>
+        <h3>📥 Download</h3>
+        <input type="text" style={inputStyle} placeholder="Enter uploaded file name (e.g., invoice.pdf.enc)" value={fileKey} onChange={e => setFileKey(e.target.value)} />
+        <input type="password" style={inputStyle} placeholder="Enter password" value={downloadPassword} onChange={e => setDownloadPassword(e.target.value)} />
+        <button style={buttonStyle} onMouseOver={e => e.target.style.backgroundColor = '#00ccff'} onMouseOut={e => e.target.style.backgroundColor = '#00ffff'} onClick={handleDownload}>Decrypt & Download</button>
+        <p style={{ color: downloadMessage.startsWith('✅') ? 'lightgreen' : 'red' }}>{downloadMessage}</p>
+      </div>
+
+      {/* Simple animation */}
+      <style>{`
+        @keyframes pulse {
+          0% { text-shadow: 0 0 5px #00ffff; }
+          50% { text-shadow: 0 0 20px #00ffff; }
+          100% { text-shadow: 0 0 5px #00ffff; }
+        }
+      `}</style>
     </div>
   )
 }

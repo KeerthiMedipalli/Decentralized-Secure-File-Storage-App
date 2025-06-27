@@ -28,7 +28,7 @@ router.post('/', upload.single('file'), async (req, res) => {
   fs.unlinkSync(req.file.path)
 
   console.log('✅ Encrypted and stored at:', outPath)
-  res.json({ message: 'File encrypted and stored in the AWS Cloud Using.', fileKey: req.file.originalname + '.enc' })
+  res.json({ message: 'File encrypted and stored in the AWS Cloud.', fileKey: req.file.originalname + '.enc' })
 })
 
 module.exports = router
